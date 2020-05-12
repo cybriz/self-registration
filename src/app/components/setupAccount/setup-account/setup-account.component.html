@@ -17,7 +17,7 @@
     <div class="col-md-6 p-0 bg-white h-md-100 loginarea">
       <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center" style="position: relative;">
         <h3 class="mb-4" style="margin-bottom: 2.5rem; font-weight: 600; line-height: normal; font-size: xx-large; padding: 5rem;">Setting up your <br /> Symple Company Account
-          <form class="form-horizontal" [formGroup]="formGrp" (ngSubmit)="onSubmit()" #f="ngForm" autocomplete="off" novalidate style="margin-top: 3rem;">
+          <form class="form-horizontal" [formGroup]="formGrp" #f="ngForm" autocomplete="off" novalidate style="margin-top: 3rem;">
             <div class="form-group" style="padding: 0 1.5rem;">
               <label for="tenant" style="font-size:2rem;">Symple Company Account Name</label>
               <input class="form-control" id="tenant" formControlName="tenant" type="text" placeholder="Please enter your company name" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
