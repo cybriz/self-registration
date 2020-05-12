@@ -1,0 +1,61 @@
+<div class="d-md-flex h-md-100 align-items-center" style="background-color:white;">
+    <div class="col-md-6 p-0 bg-img h-md-100" style="background-size: 100% 100%;">
+    <img class="logo" src="assets/images/symple_logo.png" alt="" style="float: left; height: 3.5rem;">
+        <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+            <div class="logoarea pt-5 pb-5">
+                <h5 class="mb-4 font-weight-bold" style="line-height: 5rem; font-size: 5rem; margin-top: 5.5rem;">Sign up to <br />Symple Free Plan</h5>
+                <ul style="text-align: -webkit-center; margin-top: 2.5rem;">
+                    <li style="width: fit-content; font-size: 2rem;">Start using with <strong>Free 10 Users</strong></li>
+                    <li style="width: fit-content; font-size: 2rem;">Full access to Activity Module</li>
+                    <li style="width: fit-content; font-size: 2rem;">Full access tp Attendance Module</li>
+                    <li style="width: fit-content; font-size: 2rem;">Full access to Leave Module</li>
+                </ul>
+                <img src="assets/images/screens.png" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; margin-top:1rem;">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-0 bg-white h-md-100 loginarea">
+        <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center" style="position: relative;">
+            <h3 class="mb-4" style="margin-bottom: 2.5rem; font-weight: 600; line-height: normal; font-size: xx-large; padding: 5rem;">Start with a free account <br /> for your company today
+                <form [formGroup]="formGrp" novalidate style="margin-top: 3rem;">
+                    <div class="form-group" style="padding: 0 1.5rem;">
+                        <label for="companyName" style="font-size:2rem;">Company Name</label>
+                        <input class="form-control" id="companyName" formControlName="companyName" type="text" placeholder="symple sdn bhd" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
+                        <validation-messages [control]="formGrp.controls.companyName"></validation-messages>
+                    </div>
+                    <!-- <small class="form-text text-danger" *ngIf="formGrp.hasError('isAlphaNumeric') &amp;&amp; formGrp.touched" style="padding-left: 1rem; font-size: small;">No special character are allowed.</small> -->
+                    <div class="form-group" style="padding: 0 1.5rem;">
+                        <label for="accountEmail" style="font-size:2rem;">Email</label>
+                        <input class="form-control" formControlName="accountEmail" type="accountEmail" placeholder="johndoe@test.com" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
+                        <validation-messages [control]="formGrp.controls.accountEmail"></validation-messages>
+                    </div>
+                    <div style="display:flex;">                           
+                        <div class="form-group" style="padding: 0 1.5rem; width: calc(100% / 2);">
+                            <label for="accountFirstName" style="font-size:2rem;">First Name</label>
+                            <input class="form-control" id="accountFirstName" formControlName="accountFirstName" type="text" placeholder="John" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
+                            <validation-messages [control]="formGrp.controls.accountFirstName"></validation-messages>
+                        </div>
+                        <div class="form-group" style="padding: 0 1.5rem; width: calc(100% / 2);">
+                            <label for="lastName" style="font-size:2rem;">Last Name</label>
+                            <input class="form-control" id="accountLastName" formControlName="accountLastName" type="text" placeholder="Doe" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
+                            <validation-messages [control]="formGrp.controls.accountLastName"></validation-messages>
+                        </div>
+                    </div>
+                    <div class="form-group form-check" style="padding: 0 1rem; display:flex; flex-direction:column;">
+                        <div style="display:flex;">
+                            <input class="form-check-input" id="terms" type="checkbox" style="margin-right: 1rem;" formControlName="terms" style="margin-left: 1rem;">
+                            <label class="form-check-label small text-muted" for="terms" style="font-size: 1.5rem; margin-top: 0.4rem; margin-left: 3rem;">I have read and accept the <a href="#">Terms and Conditions</a></label>
+                        </div>
+                        <validation-messages style="padding:1rem;" [control]="formGrp.controls.terms"></validation-messages>
+                    </div>
+                    <div class="form-group" style="display:flex; justify-content:center;">  
+                        <button class="btn btn-success btn-round btn-block shadow-sm" (click)="save(formGrp.value)" [disabled]="formGrp.invalid" type="submit" style="background-color: #2295F0; margin-top: 1.5rem; border-radius:7px !important; width: 25rem; padding: 1rem; font-size: 2rem;">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
+            </h3>
+        </div>
+    </div>
+</div>

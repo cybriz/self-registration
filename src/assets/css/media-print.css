@@ -1,0 +1,42 @@
+@media print
+{
+    @page {
+        margin: 0;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    .display-block table.table {
+        width: 95%;
+    }
+
+    .printArea {
+        font-family: "Roboto", Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        padding: 10px 0 10px 20px;
+    }
+
+    .spaceBetween {
+        justify-content: space-between !important;
+    }
+
+    .title {
+        color: #1565C0;
+    }
+
+    .display-block table.table > tbody > tr > td {
+        border-top: 1px solid #ddd;
+        line-height: 1.5384616;
+        padding: 6px 20px;
+        vertical-align: top;
+    }
+
+    .display-block table.table > thead > tr > th {
+        line-height: 1.5384616;
+        padding: 6px 20px;
+        text-align: left;
+        vertical-align: top;
+    }
+}
