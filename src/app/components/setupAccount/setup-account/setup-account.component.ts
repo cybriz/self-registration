@@ -59,7 +59,6 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private service: TenantValidators
   ) {
     this.route.queryParams.subscribe(itm => {
         this.queryParamsData = itm;
@@ -68,7 +67,7 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnInit() {
     this.formGrp = this.fb.group({
-      tenant: [null, Validators.compose([ Validators.required, Validators.minLength(3)]), this.service.tenantValidator()],
+      tenant: ['', [Validators.required, ValidationService.alpaNumValidator]],
       timezone: ['8', [Validators.required]],
       companyAddress: ['', [Validators.required]],
       companyEmail: ['', [Validators.required, ValidationService.emailValidator]],
@@ -81,8 +80,6 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnDestroy() { }
 
   setup() {
-    console.log(this.formGrp.value);
-    console.log(this.formGrp.valid);
     const data = this.formGrp.value;
 
     const object = {...this.queryParamsData, ...data };

@@ -16,7 +16,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forRoot(appRoutes, { useHash: true })],
   declarations: [],
   exports: [RouterModule]
 })
