@@ -22,7 +22,7 @@
               <label for="tenant" style="font-size:2rem;">Symple Company Account Name</label>
               <input class="form-control" id="tenant" formControlName="tenant" type="text" placeholder="Please enter your company name" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
               <validation-messages [control]="formGrp.controls.tenant"></validation-messages>
-              <!-- <small style="color: red; font-size: small;" *ngIf="formGrp.get('tenant').errors?.tenantExists">Company Account name already taken</small> -->
+              <small style="color: red; font-size: small;" *ngIf="formGrp.get('tenant').errors?.tenantExists">Company Account Name already taken</small>
             </div>
             <div class="form-group" style="font-size: 2rem;">
               <label class="col-lg-3 control-label" style="max-width: max-content; width: fit-content; color:black;">Company Time Zone</label>

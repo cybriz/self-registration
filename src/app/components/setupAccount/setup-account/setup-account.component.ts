@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient} from '@angular/common/http';
 import { ValidationService } from 'src/app/services/validation.service';
 import { TenantValidators } from '../../validation/tenant-async-validation.component';
 
@@ -56,9 +55,9 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
+    private service: TenantValidators
   ) {
     this.route.queryParams.subscribe(itm => {
         this.queryParamsData = itm;
@@ -67,7 +66,7 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnInit() {
     this.formGrp = this.fb.group({
-      tenant: ['', [Validators.required, ValidationService.alpaNumValidator]],
+      tenant: ['', Validators.compose([ Validators.required, ValidationService.alpaNumValidator]), this.service.tenantValidator()],
       timezone: ['8', [Validators.required]],
       companyAddress: ['', [Validators.required]],
       companyEmail: ['', [Validators.required, ValidationService.emailValidator]],

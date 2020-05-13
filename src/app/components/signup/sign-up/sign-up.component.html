@@ -22,9 +22,7 @@
                         <label for="companyName" style="font-size:2rem;">Company Name</label>
                         <input class="form-control" id="companyName" formControlName="companyName" type="text" placeholder="symple sdn bhd" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
                         <validation-messages [control]="formGrp.controls.companyName"></validation-messages>
-                        <small style="color: red; font-size: small;" *ngIf="formGrp.get('companyName').errors?.tenantExists">Company Account name already taken</small>
                     </div>
-                    <!-- <small class="form-text text-danger" *ngIf="formGrp.hasError('isAlphaNumeric') &amp;&amp; formGrp.touched" style="padding-left: 1rem; font-size: small;">No special character are allowed.</small> -->
                     <div class="form-group" style="padding: 0 1.5rem;">
                         <label for="accountEmail" style="font-size:2rem;">Email</label>
                         <input class="form-control" formControlName="accountEmail" type="accountEmail" placeholder="johndoe@test.com" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
