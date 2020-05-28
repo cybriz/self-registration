@@ -57,11 +57,11 @@ p {
 }
 
 div.h-100 {
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 input.ng-invalid.ng-touched {
-        border-color: red;
+    border-color: red;
 }
 
 table {

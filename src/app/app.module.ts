@@ -17,12 +17,11 @@ import { CongratzPageComponent } from './components/congratz/congratz-page/congr
 @NgModule({
   declarations: [
     AppComponent,
-    // RegisterComponent,
     SignUpComponent,
     SetupAccountComponent,
     SetupAdminComponent,
     CongratzPageComponent,
-    ValidationMessagesComponent
+    ValidationMessagesComponent,
   ],
   imports: [
     BrowserModule,

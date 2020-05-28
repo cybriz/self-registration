@@ -26,12 +26,14 @@ export class TenantValidators {
       return this.searchTenant(control.value)
         .pipe(
           map(res => {
-            console.log('tenantValidator', res);
             // if tenant is already taken
             if (!res.available) {
-              // return error
-              return { tenantExists: true};
-            } else { return null; }
+              document.getElementById('tenant').style.borderColor = 'red';
+              return { tenantExists: true };
+            } else {
+              document.getElementById('tenant').style.border = '1px solid #ddd';
+              return null;
+            }
           })
         );
     };

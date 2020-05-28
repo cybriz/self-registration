@@ -74,8 +74,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 })
 
 export class CongratzPageComponent implements AfterViewInit, OnDestroy, OnInit {
-  constructor(
-  ) { }
+  constructor() { }
 
   ngOnInit() {}
 

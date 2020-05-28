@@ -1,13 +1,16 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation.service';
 import { TenantValidators } from '../../validation/tenant-async-validation.component';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+declare const google: any;
 
 @Component({
   selector: 'app-setup-account',
   templateUrl: './setup-account.component.html',
-  styleUrls: [ './setup-account.component.css' ],
+  styleUrls: ['./setup-account.component.css'],
   providers: [],
   styles: [`
     .location_input {
@@ -52,38 +55,71 @@ export class SetupAccountComponent implements AfterViewInit, OnDestroy, OnInit {
     { label: '(GMT-2:00)  Argentina Standard Time', value: '-2' },
     { label: '(GMT-1:00)  Central African Time', value: '-1' }
   ];
+  suggestion: any[] = [];
 
   constructor(
     private fb: FormBuilder,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private service: TenantValidators
   ) {
     this.route.queryParams.subscribe(itm => {
-        this.queryParamsData = itm;
+      this.queryParamsData = itm;
     });
   }
 
   ngOnInit() {
     this.formGrp = this.fb.group({
-      tenant: ['', Validators.compose([ Validators.required, ValidationService.alpaNumValidator]), this.service.tenantValidator()],
+      tenant: ['', Validators.compose([Validators.required, ValidationService.alpaNumValidator]), this.service.tenantValidator()],
       timezone: ['8', [Validators.required]],
       companyAddress: ['', [Validators.required]],
       companyEmail: ['', [Validators.required, ValidationService.emailValidator]],
       companyPhone: ['', [Validators.required, ValidationService.numberValidator]],
     });
+
+    this.formGrp.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      ).subscribe(x => {
+        if (x) {
+          this.http.get<any>(`https://graph.symple.my/license/check-tenant/${x.tenant}`).subscribe(res => {
+            this.suggestion = [];
+            for (let i = 0; i < 3; i++) {
+              if (res.suggestion) { this.suggestion.push(res.suggestion[i]); }
+            }
+          });
+        }
+      });
+
+    this.initAutocomplete();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   ngOnDestroy() { }
 
   setup() {
     const data = this.formGrp.value;
 
-    const object = {...this.queryParamsData, ...data };
+    const object = { ...this.queryParamsData, ...data };
 
-    this.router.navigate(['/setup-admin'], {queryParams: object});
+    this.router.navigate(['/setup-admin'], { queryParams: object });
+  }
+
+  initAutocomplete() {
+    const acInputs = document.getElementsByClassName('autocomplete');
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < acInputs.length; i++) {
+      const autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+      autocomplete.inputId = acInputs[i].id;
+
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+          // do nth
+      });
+    }
   }
 }
 

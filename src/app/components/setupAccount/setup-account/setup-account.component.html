@@ -1,8 +1,8 @@
 <div class="d-md-flex h-md-100 align-items-center" style="background-color:white;">
     <div class="col-md-6 p-0 bg-img h-md-100" style="background-size: 100% 100%;">
       <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center" style="margin-top: 0 !important;">
-        <div class="logoarea pt-5 pb-5">
-          <img class="logo" src="assets/images/symple_logo.png" alt="" style="float: left; height: 3.5rem;">
+        <div class="logoarea pb-5">
+          <img class="logo" src="./assets/images/symple_logo.png" alt="" style="float: left; height: 3.5rem;">
           <h5 class="mb-4 font-weight-bold" style="line-height: 5rem; font-size: 5rem; margin-top: 5.5rem;">Sign up to <br />Symple Free Plan</h5>
           <ul style="text-align: -webkit-center; margin-top: 2.5rem;">
             <li style="width: fit-content; font-size: 2rem;">Start using with <strong>Free 10 Users</strong></li>
@@ -10,7 +10,7 @@
             <li style="width: fit-content; font-size: 2rem;">Full access tp Attendance Module</li>
             <li style="width: fit-content; font-size: 2rem;">Full access to Leave Module</li>
           </ul>
-          <img src="assets/images/screens.png" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; margin-top:1rem;">
+          <img src="./assets/images/screens.png" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; margin-top:1rem;">
         </div>
       </div>
     </div>
@@ -22,7 +22,11 @@
               <label for="tenant" style="font-size:2rem;">Symple Company Account Name</label>
               <input class="form-control" id="tenant" formControlName="tenant" type="text" placeholder="Please enter your company name" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
               <validation-messages [control]="formGrp.controls.tenant"></validation-messages>
-              <small style="color: red; font-size: small;" *ngIf="formGrp.get('tenant').errors?.tenantExists">Company Account Name already taken</small>
+              <small style="color: red; font-size: small;" *ngIf="formGrp.get('tenant').errors?.tenantExists"><i class="glyphicon glyphicon-exclamation-sign"></i>&nbsp;&nbsp;That username is taken. Try another.</small>
+              <div *ngIf="suggestion && suggestion.length > 0 && formGrp.get('tenant').hasError('tenantExists') && formGrp.get('tenant').dirty" style="font-size: unset !important;">
+                <small style="color: black; font-size: large;">Available: </small>
+                <small *ngFor="let i of suggestion" style="margin: 1rem; color: #2193f4; font-size: large;">{{ i }}</small>
+              </div>
             </div>
             <div class="form-group" style="font-size: 2rem;">
               <label class="col-lg-3 control-label" style="max-width: max-content; width: fit-content; color:black;">Company Time Zone</label>
@@ -36,7 +40,8 @@
             <div class="form-group" style="padding: 0 1.5rem;">
               <label for="companyAddress" style="font-size:2rem;">Company Location</label>
               <div class="location_input" style="padding-right: 3rem; border: 0.5px solid #DFDFDF;">
-                <input class="form-control" id="companyAddress" formControlName="companyAddress" type="text" placeholder="Please enter your company address" style="padding: 2.375rem .75rem; font-size: 1.5rem;">
+                <input class="form-control" formControlName="companyAddress" class="autocomplete" id="ac3" placeholder="Enter your address" type="text" style="width:100%; font-size: initial; padding: 13px;">
+                <!-- <input class="form-control" id="companyAddress" formControlName="companyAddress" type="text" placeholder="Please enter your company address" style="padding: 2.375rem .75rem; font-size: 1.5rem;"> -->
               </div>
               <validation-messages [control]="formGrp.controls.companyAddress"></validation-messages>
             </div>
